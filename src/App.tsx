@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Home, About, Four0Four } from "./components";
+import { Home, About, Four0Four } from "./views";
 import "./App.css";
 
 function App() {
