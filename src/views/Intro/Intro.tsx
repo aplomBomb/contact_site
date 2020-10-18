@@ -5,7 +5,25 @@ import "./Intro.scss";
 
 export const Intro: FC<{}> = () => {
   const [nameCurrent, cycleNameProperties] = useCycle("initial", "finished");
-  const [, setNameFinished] = useState(false);
+  const [hobbyCurrent, cycleHobbyProperties] = useCycle("initial", "finished");
+  const [nameFinished, setNameFinished] = useState(false);
+
+  const hobbyVariants = {
+    initial: {
+      opacity: 0,
+      height: "100vh",
+      width: "100vw",
+      // translateX: 100,
+      background: "transparent",
+    },
+    finished: {
+      opacity: 1,
+      height: "100vh",
+      width: "100vw",
+      // translateX: -100,
+      background: "transparent",
+    },
+  };
 
   const nameVariants = {
     initial: {
@@ -31,6 +49,7 @@ export const Intro: FC<{}> = () => {
   }, [setNameFinished, nameCurrent]);
 
   return (
+    <>
     <Frame
       style={{
         height: "100vh",
@@ -44,7 +63,29 @@ export const Intro: FC<{}> = () => {
       <RisingText
         text="My name is Christian"
         animationCallback={() => cycleNameProperties()}
+        speed={0.04}
       />
     </Frame>
+    <Frame
+      style={{
+        height: "100vh",
+        width: "100vw",
+        background: "transparent",
+      }}
+      className="Home_container"
+      variants={hobbyVariants}
+      animate={nameCurrent}
+    >
+      {nameCurrent === "finished" && (
+        <RisingText
+        text="I make stuff"
+        animationCallback={() => cycleHobbyProperties()}
+        speed={0.02}
+        fromTop={true}
+      />
+      )}
+      
+    </Frame>
+    </>
   );
 };

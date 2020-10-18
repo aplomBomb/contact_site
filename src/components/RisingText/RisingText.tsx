@@ -5,18 +5,21 @@ import "./RisingText.scss";
 export const RisingText: FC<{
   text: string;
   animationCallback: () => void;
-}> = ({ text, animationCallback }) => {
+  delay?: number
+  speed: number
+  fromTop?: boolean
+}> = ({ text, animationCallback, delay, speed, fromTop }) => {
   // Add staggering effect to the children of the container
   const containerVariants = {
     before: {},
-    after: { transition: { staggerChildren: 0.06 } },
+    after: { transition: { staggerChildren: speed } },
   };
 
   // Variants for animating each letter
   const letterVariants = {
     before: {
       opacity: 0,
-      y: 20,
+      y: fromTop ? -20 : 20,
       transition: {
         type: "spring",
         damping: 16,
@@ -55,7 +58,7 @@ export const RisingText: FC<{
       variants={containerVariants}
       initial={"before"}
       animate={"after"}
-      onAnimationComplete={() => animationCallback()}
+      onAnimationComplete={animationCallback ? () => animationCallback() : undefined }
     >
       {parsedText.map((letter: string, index: number) => (
         <Frame
