@@ -1,11 +1,11 @@
 import React, { FC, useState, useEffect } from "react";
 import { Frame, useCycle } from "framer";
-import { Name } from "../../components";
+import { RisingText } from "../../components";
 import "./Intro.scss";
 
 export const Intro: FC<{}> = () => {
   const [nameCurrent, cycleNameProperties] = useCycle("initial", "finished");
-  const [nameFinished, setNameFinished] = useState(false);
+  const [, setNameFinished] = useState(false);
 
   const nameVariants = {
     initial: {
@@ -41,8 +41,8 @@ export const Intro: FC<{}> = () => {
       variants={nameVariants}
       animate={nameCurrent}
     >
-      <Name
-        name="My name is Christian"
+      <RisingText
+        text="My name is Christian"
         animationCallback={() => cycleNameProperties()}
       />
     </Frame>

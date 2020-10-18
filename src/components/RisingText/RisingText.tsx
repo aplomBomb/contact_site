@@ -1,11 +1,11 @@
-import React, { FC, useState } from "react";
-import { Frame, useCycle } from "framer";
-import "./Name.scss";
+import React, { FC } from "react";
+import { Frame } from "framer";
+import "./RisingText.scss";
 
-export const Name: FC<{
-  name: string;
+export const RisingText: FC<{
+  text: string;
   animationCallback: () => void;
-}> = ({ name, animationCallback }) => {
+}> = ({ text, animationCallback }) => {
   // Add staggering effect to the children of the container
   const containerVariants = {
     before: {},
@@ -34,7 +34,8 @@ export const Name: FC<{
     },
   };
 
-  let parsedName = name.split("");
+  let parsedText = text.split("");
+  console.log(parsedText)
 
   return (
     <Frame
@@ -48,21 +49,21 @@ export const Name: FC<{
         letterSpacing: "-0.04em",
         fontSize: "3rem",
         color: "black",
-        display: "flex", // Set the display value to flex
-        justifyContent: "center", // Center all children elements on the x axis
+        display: "flex",
+        justifyContent: "center", 
       }}
       variants={containerVariants}
       initial={"before"}
       animate={"after"}
       onAnimationComplete={() => animationCallback()}
     >
-      {parsedName.map((letter: string, index: number) => (
+      {parsedText.map((letter: string, index: number) => (
         <Frame
           key={index}
-          width={"auto"} // Set the width to the width of the letter
-          height={26} // Set the height to the height of the text
+          width={"auto"}
+          height={26} 
           background={""}
-          style={{ position: "relative" }} // Position elements
+          style={{ position: "relative" }} 
           variants={letterVariants}
           whileHover={{ scale: 1.2 }}
         >
