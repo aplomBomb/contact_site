@@ -1,18 +1,15 @@
-import React, {useState, FC } from "react";
-import { Frame } from "framer";
+import React, { FC, useState } from "react";
+import { Frame, useCycle } from "framer";
 import "./Name.scss";
 
 export const Name: FC<{
   name: string;
-  animationCallback: () => void
+  animationCallback: () => void;
 }> = ({ name, animationCallback }) => {
-  const [finsished, setFinished] = useState(false)
-  
-
   // Add staggering effect to the children of the container
   const containerVariants = {
     before: {},
-    after: { transition: { staggerChildren: 0.07 } },
+    after: { transition: { staggerChildren: 0.06 } },
   };
 
   // Variants for animating each letter
@@ -34,7 +31,6 @@ export const Name: FC<{
         damping: 16,
         stiffness: 200,
       },
-
     },
   };
 

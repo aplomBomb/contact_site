@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Home, About, Four0Four } from "./views";
+import { Intro, About, Four0Four } from "./views";
 import "./App.css";
 
-function App() {
+export const App = () => {
   let routes = (
     <Switch>
       <Route exact path="/">
-        <Home />
+        <Intro />
       </Route>
       <Route path="/about">
         <About />
@@ -20,4 +20,3 @@ function App() {
   return <div className="App"><Router>{routes}</Router></div>;
 }
 
-export default App;
