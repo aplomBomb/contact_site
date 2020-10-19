@@ -7,6 +7,7 @@ export const Intro: FC<{}> = () => {
   const [nameCurrent, cycleNameProperties] = useCycle("initial", "finished");
   const [hobbyCurrent, cycleHobbyProperties] = useCycle("initial", "finished");
   const [nameFinished, setNameFinished] = useState(false);
+  const [hobbyFinished, setHobbyFinished] = useState(false);
 
   const hobbyVariants = {
     initial: {
@@ -46,46 +47,48 @@ export const Intro: FC<{}> = () => {
     if (nameCurrent === "finished") {
       setNameFinished(true);
     }
-  }, [setNameFinished, nameCurrent]);
+    if (hobbyCurrent === "finished") {
+      setHobbyFinished(true);
+    }
+  }, [setNameFinished, nameCurrent, hobbyCurrent, setHobbyFinished]);
 
   return (
     <>
-    <Frame
-      style={{
-        height: "100vh",
-        width: "100vw",
-        background: "transparent",
-      }}
-      className="Home_container"
-      variants={nameVariants}
-      animate={nameCurrent}
-    >
-      <RisingText
-        text="My name is Christian"
-        animationCallback={() => cycleNameProperties()}
-        speed={0.04}
-      />
-    </Frame>
-    <Frame
-      style={{
-        height: "100vh",
-        width: "100vw",
-        background: "transparent",
-      }}
-      className="Home_container"
-      variants={hobbyVariants}
-      animate={nameCurrent}
-    >
-      {nameCurrent === "finished" && (
+      <Frame
+        style={{
+          height: "100vh",
+          width: "100vw",
+          background: "transparent",
+        }}
+        className="Home_container"
+        variants={nameVariants}
+        animate={nameCurrent}
+      >
         <RisingText
-        text="I make stuff"
-        animationCallback={() => cycleHobbyProperties()}
-        speed={0.02}
-        fromTop={true}
-      />
-      )}
-      
-    </Frame>
+          text="My name is Christian"
+          animationCallback={() => cycleNameProperties()}
+          speed={0.04}
+        />
+      </Frame>
+      <Frame
+        style={{
+          height: "100vh",
+          width: "100vw",
+          background: "transparent",
+        }}
+        className="Home_container"
+        variants={hobbyVariants}
+        animate={nameCurrent}
+      >
+        {nameCurrent === "finished" && (
+          <RisingText
+            text="I make stuff"
+            animationCallback={() => cycleHobbyProperties()}
+            speed={0.02}
+            fromTop={true}
+          />
+        )}
+      </Frame>
     </>
   );
 };

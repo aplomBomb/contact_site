@@ -43,7 +43,7 @@ export const RisingText: FC<{
           setOrientation('portrait')
       }
       console.log('FIRE!!!')
-  })
+  }, [setOrientation])
   
 
   let parsedText = text.split("");
