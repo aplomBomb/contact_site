@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useLayoutEffect } from "react";
 import { Frame } from "framer";
 import "./RisingText.scss";
 
@@ -9,6 +9,7 @@ export const RisingText: FC<{
   speed: number
   fromTop?: boolean
 }> = ({ text, animationCallback, delay, speed, fromTop }) => {
+    const [orientation, setOrientation] = useState('landscape' || 'portrait')
   // Add staggering effect to the children of the container
   const containerVariants = {
     before: {},
@@ -37,6 +38,14 @@ export const RisingText: FC<{
     },
   };
 
+  useLayoutEffect(() => {
+      if (window.innerWidth < window.innerHeight) {
+          setOrientation('portrait')
+      }
+      console.log('FIRE!!!')
+  })
+  
+
   let parsedText = text.split("");
   console.log(parsedText)
 
@@ -50,7 +59,7 @@ export const RisingText: FC<{
         fontFamily: "Montserrat, Work Sans, sans-serif",
         fontWeight: "bolder",
         letterSpacing: "-0.04em",
-        fontSize: "3rem",
+        fontSize: orientation === 'landscape' ? '4rem' : '1.8rem',
         color: "black",
         display: "flex",
         justifyContent: "center", 
